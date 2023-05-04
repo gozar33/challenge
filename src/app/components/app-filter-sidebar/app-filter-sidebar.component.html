@@ -1,0 +1,30 @@
+<ng-container *ngIf="(visible$ | async) as boolean">
+<p-sidebar class="side-bar-container" [visible]="true"  (onHide)="closeSidebar()" [position]="'right'" [modal]="true" [showCloseIcon]="true">
+  <h3>Filters</h3>
+  <div class="p-field-checkbox">
+    <h5>Gender</h5>
+    <p-checkbox name="gender" value="female" [(ngModel)]="genderFilters" label="Female"></p-checkbox>
+    <p-checkbox name="gender" value="male" [(ngModel)]="genderFilters" label="Male"></p-checkbox>
+    <p-checkbox name="gender" value="other" [(ngModel)]="genderFilters" label="Others"></p-checkbox>
+    <p-checkbox name="gender" value="unknown" [(ngModel)]="genderFilters" label="I prefer not to say"></p-checkbox>
+  </div>
+  <div class="p-field">
+    <h5>Age</h5>
+    <div class="p-inputgroup">
+      <span class="p-inputgroup-addon">
+        <p-dropdown [options]="ageOptions" [(ngModel)]="ageFilter"></p-dropdown>
+      </span>
+      <input type="number" pInputText [(ngModel)]="ageValue">
+    </div>
+  </div>
+  <div class="p-field-checkbox">
+    <h5>Eye Color</h5>
+    <p-checkbox *ngFor="let color of eyeColors" name="eyeColor" [value]="color" [(ngModel)]="eyeColorFilters" [label]="color"></p-checkbox>
+  </div>
+  <div class="p-field">
+    <h5>Birth Date</h5>
+    <p-calendar [(ngModel)]="birthDateFilter" [showIcon]="true" [readonlyInput]="true" [selectionMode]="'range'"></p-calendar>
+  </div>
+  <button pButton type="button" label="Apply" (click)="onApply()"></button>
+</p-sidebar>
+</ng-container>
